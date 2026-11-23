@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pizarra Digital - Plan Anual Lengua y Literatura</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Tipografía e inclinación general */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7f6;
+            color: #333333;
+        }
+
+        /* Paleta Oficial Colegio Montano */
+        .bg-montano-blue { background-color: #1F3C88; }
+        .bg-montano-sec { background-color: #3F72AF; }
+        .bg-montano-yellow { background-color: #F2C94C; }
+        .text-montano-blue { color: #1F3C88; }
+        .text-montano-sec { color: #3F72AF; }
+        .border-montano-blue { border-color: #1F3C88; }
+        .border-montano-sec { border-color: #3F72AF; }
+
+        /* Estilos de pestañas navegables */
+        .tab-btn {
+            transition: all 0.3s ease;
+            font-style: italic;
+            border-bottom: 4px solid transparent;
+        }
+        .tab-btn.active {
+            background-color: #F2C94C;
+            color: #1F3C88;
+            font-weight: bold;
+            border-bottom: 4px solid #1F3C88;
+        }
+
+        /* Regla estricta: Énfasis en cursiva */
+        i, em, .italic-text {
+            font-style: italic;
+        }
+
+        /* Transiciones de contenido */
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col bg-gray-100">
+
+    <!-- BARRA SUPERIOR DE ENCABEZADO E INFORMACIÓN INSTITUCIONAL -->
+    <header class="bg-montano-blue text-white shadow-lg p-4 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+            
+            <!-- Logo e Identificación Institucional -->
+            <div class="flex items-center gap-4 w-full md:w-auto justify-between md:justify-start">
+                <img src="https://admisiones.colegiomontano.edu.gt/assets/img/logo-cm-blanco.webp" 
+                     alt="Colegio Montano" 
+                     class="h-12 max-h-12 object-contain"
+                     onerror="this.src='https://placehold.co/200x60/1F3C88/FFFFFF?text=Colegio+Montano'">
+                
+                <div class="border-l-2 border-white/20 pl-4">
+                    <h1 class="text-lg md:text-xl font-bold tracking-wide leading-tight">
+                        <i class="not-italic text-montano-yellow">Plan Anual Académico</i>
+                    </h1>
+                    <p class="text-xs md:text-sm text-blue-100"><i>Colegio Montano Cortijo</i></p>
+                </div>
+            </div>
+
+            <!-- Datos Identificadores del Curso -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs md:text-sm bg-white/10 p-2.5 rounded-lg border border-white/10 w-full md:w-auto">
+                <div>
+                    <span class="block text-blue-200 text-[10px] uppercase tracking-wider"><i>Materia:</i></span>
+                    <span class="font-semibold text-white"><i>Lengua y Literatura</i></span>
+                </div>
+                <div>
+                    <span class="block text-blue-200 text-[10px] uppercase tracking-wider"><i>Grado y Sección:</i></span>
+                    <span class="font-semibold text-white"><i>4° Bachillerato (Pre-Ing., Comp. y CC.LL.)</i></span>
+                </div>
+                <div>
+                    <span class="block text-blue-200 text-[10px] uppercase tracking-wider"><i>Docente:</i></span>
+                    <span class="font-semibold text-white"><i>PEM Miriam Lissette Román R.</i></span>
+                </div>
+                <div>
+                    <span class="block text-blue-200 text-[10px] uppercase tracking-wider"><i>Ciclo Escolar:</i></span>
+                    <span class="font-semibold text-montano-yellow"><i>2027</i></span>
+                </div>
+            </div>
+
+            <!-- Botón de Pantalla Completa para proyección -->
+            <button onclick="toggleFullScreen()" class="hidden sm:flex items-center gap-2 bg-montano-yellow hover:bg-yellow-400 text-montano-blue font-bold py-2 px-4 rounded-lg shadow transition text-xs md:text-sm whitespace-nowrap">
+                <span>🖥️</span> <i>Pantalla Completa</i>
+            </button>
+        </div>
+    </header>
+
+    <!-- BARRA DE NAVEGACIÓN POR PESTAÑAS HORIZONTALES (NUMERALES ROMANOS) -->
+    <nav class="bg-montano-sec shadow-md overflow-x-auto">
+        <div class="max-w-7xl mx-auto flex whitespace-nowrap px-2">
+            <button class="tab-btn active px-4 py-3 text-sm text-white hover:bg-white/10 flex-1 text-center" onclick="openTab(event, 'tab1')">
+                <i>I) DESCRIPTOR</i>
+            </button>
+            <button class="tab-btn px-4 py-3 text-sm text-white hover:bg-white/10 flex-1 text-center" onclick="openTab(event, 'tab2')">
+                <i>II) OBJETIVOS</i>
+            </button>
+            <button class="tab-btn px-4 py-3 text-sm text-white hover:bg-white/10 flex-1 text-center" onclick="openTab(event, 'tab3')">
+                <i>III) COMPETENCIAS</i>
+            </button>
+            <button class="tab-btn px-4 py-3 text-sm text-white hover:bg-white/10 flex-1 text-center" onclick="openTab(event, 'tab4')">
+                <i>IV) INDICADORES</i>
+            </button>
+            <button class="tab-btn px-4 py-3 text-sm text-white hover:bg-white/10 flex-1 text-center" onclick="openTab(event, 'tab5')">
+                <i>V) MÉTODOS</i>
+            </button>
+            <button class="tab-btn px-4 py-3 text-sm text-white hover:bg-white/10 flex-1 text-center" onclick="openTab(event, 'tab6')">
+                <i>VI) BIBLIOGRAFÍA</i>
+            </button>
+            <button class="tab-btn px-4 py-3 text-sm text-white hover:bg-white/10 flex-1 text-center" onclick="openTab(event, 'tab7')">
+                <i>VII) CONTENIDOS</i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- CONTENEDOR PRINCIPAL DE CONTENIDOS -->
+    <main class="max-w-7xl mx-auto p-4 md:p-6 flex-grow w-full">
+
+        <!-- I) DESCRIPTOR DEL CURSO -->
+        <section id="tab1" class="tab-content active bg-white rounded-xl shadow-md p-6 border-t-4 border-montano-blue">
+            <div class="border-b border-gray-200 pb-3 mb-4">
+                <h2 class="text-xl font-bold text-montano-blue"><i>I) DESCRIPTOR DEL CURSO</i></h2>
+                <p class="text-sm text-gray-500"><i>Subárea de Comunicación y Lenguaje</i></p>
+            </div>
+            <div class="space-y-4 text-gray-700 leading-relaxed text-justify">
+                <p class="bg-blue-50 p-4 rounded-lg border-l-4 border-montano-sec">
+                    <i>Esta subárea de Comunicación y Lenguaje tiene como propósito que los estudiantes logren el dominio de las competencias lingüísticas que se han desarrollado en su educación básica y propiciar el desarrollo de un pensamiento analítico-reflexivo, crítico y de propuesta, a partir de los dos elementos que la forman.</i>
+                </p>
+                <p>
+                    <i>Desde el enfoque del elemento de la lengua se activa y mejora el uso de las herramientas lingüísticas y gramaticales, de manera que el estudiante perfeccione su competencia comunicativa, tanto en forma oral como escrita, en cualquier nivel lingüístico o situación comunicativa que se le presente en su diario quehacer.</i>
+                </p>
+                <p>
+                    <i>Además, se estimula el desarrollo de las destrezas de comprensión lectora, las cuales, aunadas con la literatura de los Pueblos del mundo —el otro elemento de subárea—, proporcionen al estudiante la habilidad de la metacognición, pues será capaz de realizar no sólo una interpretación literal sino una metalectura, que le permita reflexionar, analizar y contextualizar las obras literarias que tenga a su alcance. Estas deberán servirle no como un fin sino como un medio para crear un pensamiento crítico y una actitud de proposición.</i>
+                </p>
+            </div>
+        </section>
+
+        <!-- II) OBJETIVOS GENERALES -->
+        <section id="tab2" class="tab-content bg-white rounded-xl shadow-md p-6 border-t-4 border-montano-blue">
+            <div class="border-b border-gray-200 pb-3 mb-4">
+                <h2 class="text-xl font-bold text-montano-blue"><i>II) OBJETIVOS GENERALES</i></h2>
+                <p class="text-sm text-gray-500"><i>Propósitos fundamentales del curso</i></p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="flex items-start gap-3 p-4 bg-gray-50 rounded-lg border border-gray-200">
+                    <span class="bg-montano-sec text-white rounded-full w-8 h-8 flex items-center justify-center font-bold shrink-0">1</span>
+                    <p class="text-gray-700"><i>Expresar su opinión oral y de manera escrita utilizando los elementos que les proporciona el Idioma Español.</i></p>
+                </div>
+                <div class="flex items-start gap-3 p-4 bg-gray-50 rounded-lg border border-gray-200">
+                    <span class="bg-montano-sec text-white rounded-full w-8 h-8 flex items-center justify-center font-bold shrink-0">2</span>
+                    <p class="text-gray-700"><i>Redactar material literario aplicando las técnicas de redacción y ortográficas en todo escrito.</i></p>
+                </div>
+                <div class="flex items-start gap-3 p-4 bg-gray-50 rounded-lg border border-gray-200">
+                    <span class="bg-montano-sec text-white rounded-full w-8 h-8 flex items-center justify-center font-bold shrink-0">3</span>
+                    <p class="text-gray-700"><i>Leer comprensivamente cualquier escrito.</i></p>
+                </div>
+                <div class="flex items-start gap-3 p-4 bg-gray-50 rounded-lg border border-gray-200">
+                    <span class="bg-montano-sec text-white rounded-full w-8 h-8 flex items-center justify-center font-bold shrink-0">4</span>
+                    <p class="text-gray-700"><i>Comunicar sus ideas de una manera clara y fluida, utilizando los elementos de la comunicación y el lenguaje oral y escrito.</i></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- III) COMPETENCIAS -->
+        <section id="tab3" class="tab-content bg-white rounded-xl shadow-md p-6 border-t-4 border-montano-blue">
+            <div class="border-b border-gray-200 pb-3 mb-6">
+                <h2 class="text-xl font-bold text-montano-blue"><i>III) COMPETENCIAS DEL ÁREA Y COMPETENCIAS CM</i></h2>
+                <p class="text-sm text-gray-500"><i>Integración disciplinar y competencias transversales institucionales</i></p>
+            </div>
+
+            <!-- Competencias Académicas de Área -->
+            <div class="mb-8">
+                <h3 class="text-lg font-bold text-montano-sec mb-4 border-b pb-2"><i>Competencias Académicas de Área</i></h3>
+                <div class="space-y-3">
+                    <div class="p-3 bg-blue-50 border-l-4 border-montano-blue rounded-r-lg">
+                        <p class="font-semibold text-montano-blue"><i>1. Utiliza los conocimientos lingüísticos para lograr una comunicación adecuada.</i></p>
+                    </div>
+                    <div class="p-3 bg-blue-50 border-l-4 border-montano-blue rounded-r-lg">
+                        <p class="font-semibold text-montano-blue"><i>2. Construye significados a partir de la literatura de los Pueblos de Guatemala y de América, como aporte cultural universal.</i></p>
+                    </div>
+                    <div class="p-3 bg-blue-50 border-l-4 border-montano-blue rounded-r-lg">
+                        <p class="font-semibold text-montano-blue"><i>3. Utiliza la intertextualidad para redactar textos significativos sobre su entorno, tomando en cuenta la normativa y la gramática de su idioma.</i></p>
+                    </div>
+                    <div class="p-3 bg-blue-50 border-l-4 border-montano-blue rounded-r-lg">
+                        <p class="font-semibold text-montano-blue"><i>4. Elabora discursos orales y escritos fundamentados en previas investigaciones, en forma autónoma y crítica para generar propuestas.</i></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Competencias CM (Fijo Institucional) -->
+            <div>
+                <h3 class="text-lg font-bold text-montano-sec mb-4 border-b pb-2"><i>Competencias Institucionales CM</i></h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+                    <div class="p-3 bg-yellow-50 border border-montano-yellow rounded-lg">
+                        <p class="font-semibold text-gray-800 text-sm"><i>Pensamiento crítico y resolución de problemas</i></p>
+                    </div>
+                    <div class="p-3 bg-yellow-50 border border-montano-yellow rounded-lg">
+                        <p class="font-semibold text-gray-800 text-sm"><i>Colaboración y trabajo en equipo</i></p>
+                    </div>
+                    <div class="p-3 bg-yellow-50 border border-montano-yellow rounded-lg">
+                        <p class="font-semibold text-gray-800 text-sm"><i>Competencias digitales</i></p>
+                    </div>
+                    <div class="p-3 bg-yellow-50 border border-montano-yellow rounded-lg">
+                        <p class="font-semibold text-gray-800 text-sm"><i>Comunicación efectiva</i></p>
+                    </div>
+                    <div class="p-3 bg-yellow-50 border border-montano-yellow rounded-lg">
+                        <p class="font-semibold text-gray-800 text-sm"><i>Creatividad e innovación</i></p>
+                    </div>
+                    <div class="p-3 bg-yellow-50 border border-montano-yellow rounded-lg">
+                        <p class="font-semibold text-gray-800 text-sm"><i>Aprendizaje autónomo y adaptabilidad</i></p>
+                    </div>
+                    <div class="p-3 bg-yellow-50 border border-montano-yellow rounded-lg">
+                        <p class="font-semibold text-gray-800 text-sm"><i>Conciencia global y cultural</i></p>
+                    </div>
+                    <div class="p-3 bg-yellow-50 border border-montano-yellow rounded-lg">
+                        <p class="font-semibold text-gray-800 text-sm"><i>Ética y ciudadanía digital</i></p>
+                    </div>
+                    <div class="p-3 bg-yellow-50 border border-montano-yellow rounded-lg">
+                        <p class="font-semibold text-gray-800 text-sm"><i>Gestión emocional y resiliencia</i></p>
+                    </div>
+                    <div class="p-3 bg-yellow-50 border border-montano-yellow rounded-lg">
+                        <p class="font-semibold text-gray-800 text-sm"><i>Conciencia ecológica y sostenibilidad</i></p>
+                    </div>
+                    <div class="p-3 bg-yellow-50 border border-montano-yellow rounded-lg md:col-span-2 lg:col-span-1">
+                        <p class="font-semibold text-gray-800 text-sm"><i>Desempeño de roles de liderazgo</i></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- IV) INDICADORES DE LOGRO -->
+        <section id="tab4" class="tab-content bg-white rounded-xl shadow-md p-6 border-t-4 border-montano-blue">
+            <div class="border-b border-gray-200 pb-3 mb-6">
+                <h2 class="text-xl font-bold text-montano-blue"><i>IV) INDICADORES DE LOGRO</i></h2>
+                <p class="text-sm text-gray-500"><i>Criterios de evaluación y verificación del desempeño</i></p>
+            </div>
+
+            <div class="space-y-6">
+                <div class="border border-gray-200 rounded-lg overflow-hidden">
+                    <div class="bg-montano-sec text-white p-3 font-semibold">
+                        <i>Competencia 1: Uso de conocimientos lingüísticos</i>
+                    </div>
+                    <ul class="p-4 space-y-2 text-sm text-gray-700 divide-y divide-gray-100">
+                        <li class="pt-2"><i>1.1. Identifica el lenguaje como un sistema de comunicación.</i></li>
+                        <li class="pt-2"><i>1.2. Establece diferencias y similitudes entre lenguaje, lengua o idioma y habla.</i></li>
+                        <li class="pt-2"><i>1.3. Establece el proceso de transformación en la adquisición de la lengua.</i></li>
+                    </ul>
+                </div>
+
+                <div class="border border-gray-200 rounded-lg overflow-hidden">
+                    <div class="bg-montano-sec text-white p-3 font-semibold">
+                        <i>Competencia 2: Construcción de significados literarios</i>
+                    </div>
+                    <ul class="p-4 space-y-2 text-sm text-gray-700 divide-y divide-gray-100">
+                        <li class="pt-2"><i>2.1. Utiliza diferentes estrategias para comprender las lecturas a nivel de juicio crítico.</i></li>
+                        <li class="pt-2"><i>2.2. Analiza críticamente por lo menos tres textos fundamentales de la literatura de los Pueblos de Guatemala y de América, seleccionados.</i></li>
+                        <li class="pt-2"><i>2.3. Lee por lo menos cinco textos considerados clásicos de diferentes culturas, con el fin de construir referentes y comparaciones culturales amplios.</i></li>
+                    </ul>
+                </div>
+
+                <div class="border border-gray-200 rounded-lg overflow-hidden">
+                    <div class="bg-montano-sec text-white p-3 font-semibold">
+                        <i>Competencia 3: Intertextualidad y redacción normativa</i>
+                    </div>
+                    <ul class="p-4 space-y-2 text-sm text-gray-700 divide-y divide-gray-100">
+                        <li class="pt-2"><i>3.1. Recurre a diferentes tipos de textos según su intención comunicativa.</i></li>
+                        <li class="pt-2"><i>3.2. Acude a la lectura de obras de los Pueblos de Guatemala y de América, para crear escritos originales.</i></li>
+                        <li class="pt-2"><i>3.3. Produce diversos textos aplicando la gramática y ortografía del idioma.</i></li>
+                        <li class="pt-2"><i>3.4. Utiliza el conocimiento de la estructura de las palabras para ampliar su vocabulario.</i></li>
+                    </ul>
+                </div>
+
+                <div class="border border-gray-200 rounded-lg overflow-hidden">
+                    <div class="bg-montano-sec text-white p-3 font-semibold">
+                        <i>Competencia 4: Discursos fundamentados e investigación</i>
+                    </div>
+                    <ul class="p-4 space-y-2 text-sm text-gray-700 divide-y divide-gray-100">
+                        <li class="pt-2"><i>4.1. Utiliza diferentes estrategias para obtener información.</i></li>
+                        <li class="pt-2"><i>4.2. Aplica técnicas específicas para sintetizar textos.</i></li>
+                        <li class="pt-2"><i>4.3. Presenta el resultado de investigaciones realizadas por iniciativa propia, por medio de diferentes tipos de disertación.</i></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- V) MÉTODOS DIDÁCTICOS (CONTENIDO FIJO INSTITUCIONAL) -->
+        <section id="tab5" class="tab-content bg-white rounded-xl shadow-md p-6 border-t-4 border-montano-blue">
+            <div class="border-b border-gray-200 pb-3 mb-6">
+                <h2 class="text-xl font-bold text-montano-blue"><i>V) MÉTODOS DIDÁCTICOS INSTITUCIONALES</i></h2>
+                <p class="text-sm text-gray-500"><i>Modelo Activo-Colaborativo y Estructura del Período Doble (70 minutos)</i></p>
+            </div>
+
+            <!-- Estructura del Período Doble (70 min) -->
+            <div class="mb-8">
+                <h3 class="text-lg font-bold text-montano-sec mb-4"><i>Estructura del Período Doble (70 Minutos)</i></h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                    
+                    <div class="p-4 border-2 border-montano-sec rounded-xl bg-blue-50/50 flex flex-col justify-between">
+                        <div>
+                            <span class="inline-block px-2 py-1 bg-montano-sec text-white text-xs font-bold rounded mb-2"><i>Fase 1</i></span>
+                            <h4 class="font-bold text-montano-blue mb-2"><i>Introducción Motivante</i></h4>
+                            <p class="text-xs text-gray-600"><i>Activación de presaberes mediante juegos, dinamización y lluvia de ideas. Lectura previa en casa.</i></p>
+                        </div>
+                    </div>
+
+                    <div class="p-4 border-2 border-montano-sec rounded-xl bg-blue-50/50 flex flex-col justify-between">
+                        <div>
+                            <span class="inline-block px-2 py-1 bg-montano-sec text-white text-xs font-bold rounded mb-2"><i>Fase 2</i></span>
+                            <h4 class="font-bold text-montano-blue mb-2"><i>Trabajo Individual</i></h4>
+                            <p class="text-xs text-gray-600"><i>Desarrollo de potencialidades, habilidades y destrezas individuales de forma autónoma.</i></p>
+                        </div>
+                    </div>
+
+                    <div class="p-4 border-2 border-montano-sec rounded-xl bg-blue-50/50 flex flex-col justify-between">
+                        <div>
+                            <span class="inline-block px-2 py-1 bg-montano-sec text-white text-xs font-bold rounded mb-2"><i>Fase 3</i></span>
+                            <h4 class="font-bold text-montano-blue mb-2"><i>Trabajo en Equipo</i></h4>
+                            <p class="text-xs text-gray-600"><i>Interacción con roles definidos bajo la consigna "todos para uno y uno para todos".</i></p>
+                        </div>
+                    </div>
+
+                    <div class="p-4 border-2 border-montano-sec rounded-xl bg-blue-50/50 flex flex-col justify-between">
+                        <div>
+                            <span class="inline-block px-2 py-1 bg-montano-sec text-white text-xs font-bold rounded mb-2"><i>Fase 4</i></span>
+                            <h4 class="font-bold text-montano-blue mb-2"><i>Plenaria</i></h4>
+                            <p class="text-xs text-gray-600"><i>Exposición pública, diálogo socrático y consolidación colectiva de aprendizajes.</i></p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Metodologías Clave -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="p-4 bg-yellow-50 rounded-lg border-l-4 border-montano-yellow">
+                    <h4 class="font-bold text-montano-blue mb-1"><i>Aprendizaje Basado en Proyectos (ABP)</i></h4>
+                    <p class="text-xs text-gray-700"><i>Enfoque que involucra al estudiante en la resolución activa de problemas reales y generación de propuestas.</i></p>
+                </div>
+                <div class="p-4 bg-yellow-50 rounded-lg border-l-4 border-montano-yellow">
+                    <h4 class="font-bold text-montano-blue mb-1"><i>Constructivismo y Mejora Continua</i></h4>
+                    <p class="text-xs text-gray-700"><i>Aplicación de la Epistemología de Dr. Deming para la mejora continua de la clase y desarrollo del pensamiento crítico.</i></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- VI) BIBLIOGRAFÍA -->
+        <section id="tab6" class="tab-content bg-white rounded-xl shadow-md p-6 border-t-4 border-montano-blue">
+            <div class="border-b border-gray-200 pb-3 mb-6">
+                <h2 class="text-xl font-bold text-montano-blue"><i>VI) BIBLIOGRAFÍA Y FUENTES DE REFERENCIA</i></h2>
+                <p class="text-sm text-gray-500"><i>Textos oficiales del curso</i></p>
+            </div>
+
+            <div class="space-y-4">
+                <div class="p-4 bg-gray-50 rounded-lg border border-gray-200 flex items-start gap-3">
+                    <span class="text-2xl">📚</span>
+                    <div>
+                        <p class="font-semibold text-gray-800"><i>VELÁSQUEZ RODRÍGUEZ, Carlos Augusto.</i></p>
+                        <p class="text-sm text-gray-600"><i>Comunicación y Lenguaje. Guatemala. ECO Ediciones. 2014. P. 287.</i></p>
+                    </div>
+                </div>
+
+                <div class="p-4 bg-gray-50 rounded-lg border border-gray-200 flex items-start gap-3">
+                    <span class="text-2xl">📚</span>
+                    <div>
+                        <p class="font-semibold text-gray-800"><i>GALINDO ARANDI, Jorge Luis.</i></p>
+                        <p class="text-sm text-gray-600"><i>Literatura Hispanoamericana. Guatemala. Editorial Santillana S. A. 2008. p. 224. ISBN: 99922-3-423-7.</i></p>
+                    </div>
+                </div>
+
+                <div class="p-4 bg-gray-50 rounded-lg border border-gray-200 flex items-start gap-3">
+                    <span class="text-2xl">📚</span>
+                    <div>
+                        <p class="font-semibold text-gray-800"><i>VILLALOBOS, Mynor.</i></p>
+                        <p class="text-sm text-gray-600"><i>Comunicación y Literatura. Argumentos 10. Santillana. 2010.</i></p>
+                    </div>
+                </div>
+
+                <div class="p-4 bg-gray-50 rounded-lg border border-gray-200 flex items-start gap-3">
+                    <span class="text-2xl">📚</span>
+                    <div>
+                        <p class="font-semibold text-gray-800"><i>ARRIAZA, Roberto.</i></p>
+                        <p class="text-sm text-gray-600"><i>Literatura Hispanoamericana. Texdigua. 2015. Guatemala.</i></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- VII) CONTENIDOS -->
+        <section id="tab7" class="tab-content bg-white rounded-xl shadow-md p-6 border-t-4 border-montano-blue">
+            <div class="border-b border-gray-200 pb-3 mb-6">
+                <h2 class="text-xl font-bold text-montano-blue"><i>VII) SECUENCIA DE CONTENIDOS POR UNIDAD</i></h2>
+                <p class="text-sm text-gray-500"><i>Desglose temático anual</i></p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Unidad I -->
+                <div class="border border-gray-200 rounded-xl overflow-hidden shadow-sm">
+                    <div class="bg-montano-blue text-white p-3 font-bold flex justify-between items-center">
+                        <span><i>UNIDAD I</i></span>
+                        <span class="text-xs bg-montano-yellow text-montano-blue px-2 py-0.5 rounded font-bold"><i>Primer Bimestre</i></span>
+                    </div>
+                    <ul class="p-4 text-xs md:text-sm text-gray-700 space-y-1.5 list-disc list-inside">
+                        <li><i>Proceso de comunicación, signo lingüístico, comunicación verbal y no verbal.</i></li>
+                        <li><i>Lengua oral y lengua escrita.</i></li>
+                        <li><i>Reglas generales de acentuación.</i></li>
+                        <li><i>Oratoria, el discurso, la persuasión.</i></li>
+                        <li><i>El párrafo.</i></li>
+                        <li><i>Tipología textual.</i></li>
+                        <li><i>Conceptos generales de literatura.</i></li>
+                        <li><i>Literatura Universal: Literatura griega y latina.</i></li>
+                        <li><i>La Edad Media, características, épica y lírica.</i></li>
+                    </ul>
+                </div>
+
+                <!-- Unidad II -->
+                <div class="border border-gray-200 rounded-xl overflow-hidden shadow-sm">
+                    <div class="bg-montano-blue text-white p-3 font-bold flex justify-between items-center">
+                        <span><i>UNIDAD II</i></span>
+                        <span class="text-xs bg-montano-yellow text-montano-blue px-2 py-0.5 rounded font-bold"><i>Segundo Bimestre</i></span>
+                    </div>
+                    <ul class="p-4 text-xs md:text-sm text-gray-700 space-y-1.5 list-disc list-inside">
+                        <li><i>Semántica: sinonimia, antonimia, connotación y denotación.</i></li>
+                        <li><i>Oratoria y argumentación: argumentos y partes del discurso.</i></li>
+                        <li><i>Signos del teatro.</i></li>
+                        <li><i>Siglo de Oro (Barroco): Prosa de ficción y didáctica, Relatos de Indias, Teatro.</i></li>
+                        <li><i>Conceptismo y culteranismo. Poesía religiosa.</i></li>
+                        <li><i>Renacimiento inglés: Teatro inglés, William Shakespeare (etapas de su obra).</i></li>
+                        <li><i>Teatro francés y teatro europeo del siglo XVIII.</i></li>
+                        <li><i>Lecturas: La vida es sueño, El tartufo, El enfermo imaginario.</i></li>
+                    </ul>
+                </div>
+
+                <!-- Unidad III -->
+                <div class="border border-gray-200 rounded-xl overflow-hidden shadow-sm">
+                    <div class="bg-montano-blue text-white p-3 font-bold flex justify-between items-center">
+                        <span><i>UNIDAD III</i></span>
+                        <span class="text-xs bg-montano-yellow text-montano-blue px-2 py-0.5 rounded font-bold"><i>Tercer Bimestre</i></span>
+                    </div>
+                    <ul class="p-4 text-xs md:text-sm text-gray-700 space-y-1.5 list-disc list-inside">
+                        <li><i>Técnicas de exposición grupales.</i></li>
+                        <li><i>Semántica: cambio semántico, palabras homónimas, homógrafas y homófonas.</i></li>
+                        <li><i>Gramática descriptiva: La oración simple, análisis sintáctico, oración compuesta.</i></li>
+                        <li><i>Ortografía avanzada.</i></li>
+                        <li><i>Romanticismo: Características.</i></li>
+                        <li><i>Realismo y Naturalismo: características.</i></li>
+                        <li><i>Novela estadounidense.</i></li>
+                        <li><i>Lecturas: Las penas del joven Werther, Robinson Crusoe, Oliver Twist, Nana.</i></li>
+                    </ul>
+                </div>
+
+                <!-- Unidad IV -->
+                <div class="border border-gray-200 rounded-xl overflow-hidden shadow-sm">
+                    <div class="bg-montano-blue text-white p-3 font-bold flex justify-between items-center">
+                        <span><i>UNIDAD IV</i></span>
+                        <span class="text-xs bg-montano-yellow text-montano-blue px-2 py-0.5 rounded font-bold"><i>Cuarto Bimestre</i></span>
+                    </div>
+                    <ul class="p-4 text-xs md:text-sm text-gray-700 space-y-1.5 list-disc list-inside">
+                        <li><i>Medios de comunicación y periodismo.</i></li>
+                        <li><i>Artículos de opinión.</i></li>
+                        <li><i>Literatura del siglo XX: Nuevas formas literarias (Marcel Proust, James Joyce).</i></li>
+                        <li><i>Movimientos de vanguardia.</i></li>
+                        <li><i>Existencialismo y literatura de posguerra.</i></li>
+                        <li><i>Posmodernismo.</i></li>
+                        <li><i>Lecturas: La metamorfosis, El extranjero.</i></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- PIE DE PÁGINA INSTITUCIONAL -->
+    <footer class="bg-montano-blue text-white text-center py-3 text-xs mt-auto">
+        <p><i>Colegio Montano &copy; 2027 - Sistema de Planificación Pedagógica Institucional</i></p>
+    </footer>
+
+    <!-- LÓGICA DE INTERACCIÓN Y NAVEGACIÓN -->
+    <script>
+        function openTab(evt, tabName) {
+            let i, tabcontent, tablinks;
+            
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].classList.remove("active");
+            }
+            
+            tablinks = document.getElementsByClassName("tab-btn");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].classList.remove("active");
+            }
+            
+            document.getElementById(tabName).classList.add("active");
+            evt.currentTarget.classList.add("active");
+        }
+
+        function toggleFullScreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch(err => {
+                    console.log("Error al intentar activar modo pantalla completa: " + err.message);
+                });
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                }
+            }
+        }
+    </script>
+</body>
+</html>
